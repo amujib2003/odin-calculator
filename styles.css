@@ -1,0 +1,50 @@
+#container {
+    display:flex;
+    justify-content: center;
+}
+
+/* align-items will determine how display and buttons
+are positioned. flex-start will put them completely
+to the left.
+*/
+#calculator {
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 5px solid black;
+    height: 750px;
+    width: 500px;
+}
+
+#display {
+    display:flex;
+    border: 3px solid black;
+    height: 100px;
+    width: 400px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#buttons {
+    display: flex;
+}
+
+.btn {
+    border: 3px solid black;
+    margin: 20px;
+    height: 70px;
+    width: 70px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#numbers {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    max-width: 420px;
+}
