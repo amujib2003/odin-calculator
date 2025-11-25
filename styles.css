@@ -10,41 +10,78 @@ to the left.
 #calculator {
     display:flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     border: 5px solid black;
     height: 750px;
     width: 500px;
+    background-color: grey;
+}
+
+#top {
+    display:flex;
+    justify-content: center;
+    border-bottom: 3px solid black;
 }
 
 #display {
     display:flex;
     border: 3px solid black;
     height: 100px;
-    width: 400px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    width: 430px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    background-color: white;
 }
 
 #buttons {
     display: flex;
+    margin-top: 30px;
 }
 
 .btn {
     border: 3px solid black;
-    margin: 20px;
-    height: 70px;
-    width: 70px;
+    /*margin: 20px; */
+    height: 75px;
+    width: 75px;
     display:flex;
     justify-content: center;
     align-items: center;
+    background-color: darkgrey;
+    font-size: 30px;
 }
 
 
 #numbers {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
+    align-content: center;
     flex-wrap: wrap;
     flex-direction: row-reverse;
     max-width: 420px;
+    gap: 50px;
+}
+
+#operators {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.rbtn {
+    border: 3px solid black;
+    height: 60px;
+    width: 60px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkgrey;
+    font-size: 20px;
+}
+
+.equal {
+    background-color: lightblue;
+}
+
+.rmv {
+    background-color: crimson;
 }
