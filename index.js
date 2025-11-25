@@ -32,4 +32,21 @@ function operate(operator, a, b) {
     }
 }
 
-console.log(operate('*',7,-8));
+const display = document.querySelector("#display");
+
+const numberButtons = document.querySelectorAll(".btn");
+
+numberButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        display.innerHTML += btn.textContent;
+//        initial = display;
+    });
+});
+
+const operatorButtons = document.querySelectorAll(".rbtn");
+
+operatorButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        console.log(btn.textContent);
+    });
+});

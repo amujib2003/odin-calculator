@@ -3,17 +3,13 @@
     justify-content: center;
 }
 
-/* align-items will determine how display and buttons
-are positioned. flex-start will put them completely
-to the left.
-*/
 #calculator {
     display:flex;
     flex-direction: column;
     border: 5px solid black;
     height: 750px;
     width: 500px;
-    background-color: grey;
+    background-color: dimgrey;
 }
 
 #top {
@@ -40,9 +36,8 @@ to the left.
 
 .btn {
     border: 3px solid black;
-    /*margin: 20px; */
-    height: 75px;
-    width: 75px;
+    height: 80px;
+    width: 80px;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -69,8 +64,8 @@ to the left.
 
 .rbtn {
     border: 3px solid black;
-    height: 60px;
-    width: 60px;
+    height: 65px;
+    width: 65px;
     display:flex;
     justify-content: center;
     align-items: center;
