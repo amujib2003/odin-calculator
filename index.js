@@ -1,10 +1,12 @@
 // .reduce for following functions
 
-let initial
-let operator 
-let result
+let firstNumber = "";
+let secondNumber = "";
+let operator = null;
+let shouldResetDisplay = false;
 
-function add(array) {
+
+function add(a,b) {
     return(a + b);
 }
 
@@ -25,9 +27,9 @@ function operate(operator, a, b) {
         return add(a,b);
     } else if (operator === '-') {
         return subtract(a,b);
-    } else if (operator === '*') {
+    } else if (operator === 'x') {
         return multiply(a,b);
-    } else (operator === '/'); {
+    } else if (operator === '/'); {
         return divide(a,b);
     }
 }
@@ -38,8 +40,17 @@ const numberButtons = document.querySelectorAll(".btn");
 
 numberButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+        if (shouldResetDisplay) {
+            display.innerHTML = "";
+            shouldResetDisplay = false;
+        }
+
+        if (btn.innerHTML === "+/-") {
+            display.innerHTML = String(-Number(display.innerHTML));
+            return;
+        }
+
         display.innerHTML += btn.textContent;
-//        initial = display;
     });
 });
 
@@ -47,6 +58,30 @@ const operatorButtons = document.querySelectorAll(".rbtn");
 
 operatorButtons.forEach(btn => {
     btn.addEventListener("click", () => {
-        console.log(btn.textContent);
+
+        if (btn.textContent === "C") {
+            display.innerHTML = "";
+        }
+
+        if (btn.textContent === "del") {
+            display.innerHTML = display.innerHTML.slice(0, -1);
+            return;
+        }
+
+        if (btn.textContent !== "=") {
+            firstNumber = display.innerHTML;
+            operator = btn.textContent;
+            shouldResetDisplay = true;
+        } else {
+            secondNumber = display.innerHTML;
+
+            const result = operate(operator, Number(firstNumber), Number(secondNumber));
+
+            display.innerHTML = result;
+            firstNumber = result;
+            operator = null;
+            shouldResetDisplay = true;
+        }
+
     });
 });
