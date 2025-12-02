@@ -1,5 +1,3 @@
-// .reduce for following functions
-
 let firstNumber = "";
 let secondNumber = "";
 let operator = null;
@@ -29,17 +27,23 @@ function operate(operator, a, b) {
         return subtract(a,b);
     } else if (operator === 'x') {
         return multiply(a,b);
-    } else if (operator === '/'); {
+    } else if (operator === '/') {
+        if (b === 0) {return undefined};
         return divide(a,b);
     }
 }
 
-const display = document.querySelector("#display");
+function roundNumber (num) {
+    return Math.round(num * 1e10) / 1e10;
+}
 
+const display = document.querySelector("#display");
 const numberButtons = document.querySelectorAll(".btn");
+const operatorButtons = document.querySelectorAll(".rbtn");
 
 numberButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+
         if (shouldResetDisplay) {
             display.innerHTML = "";
             shouldResetDisplay = false;
@@ -50,38 +54,94 @@ numberButtons.forEach(btn => {
             return;
         }
 
+        if (btn.textContent === ".") {
+            if (display.innerHTML.includes(".")) {
+                return;
+            }
+        }
+
         display.innerHTML += btn.textContent;
     });
 });
 
-const operatorButtons = document.querySelectorAll(".rbtn");
 
 operatorButtons.forEach(btn => {
     btn.addEventListener("click", () => {
 
-        if (btn.textContent === "C") {
+        const value = btn.textContent;
+
+        if (value === "C") {
             display.innerHTML = "";
+            firstNumber = "";
+            secondNumber = "";
+            operator = null;
+            return;
         }
 
-        if (btn.textContent === "del") {
+        if (value === "del") {
             display.innerHTML = display.innerHTML.slice(0, -1);
             return;
         }
 
-        if (btn.textContent !== "=") {
-            firstNumber = display.innerHTML;
-            operator = btn.textContent;
-            shouldResetDisplay = true;
-        } else {
+        if (value === "=") {
+            if (!operator || !firstNumber) return;
+
             secondNumber = display.innerHTML;
 
             const result = operate(operator, Number(firstNumber), Number(secondNumber));
 
-            display.innerHTML = result;
-            firstNumber = result;
+            const final = roundNumber(result);
+            display.innerHTML = final;
+            firstNumber = final;
             operator = null;
             shouldResetDisplay = true;
+            return;
         }
 
+        if(["+", "-", "x", "/"].includes(value)) {
+
+            const lastChar = display.innerHTML.slice(-1);
+
+            if(["+", "-", "x", "/"].includes(lastChar)) {
+                display.innerHTML = display.innerHTML.slice(0, -1) + value;
+                operator = value;
+                return;
+            }
+
+        if (operator) {
+            secondNumber = display.innerHTML;
+
+            const result = operate(operator, Number(firstNumber), Number(secondNumber));
+
+            display.innerHTML = final;
+            firstNumber = final;
+        } else {
+            firstNumber = display.innerHTML;
+        }
+     
+        operator = value;
+        shouldResetDisplay = true;
+
+        display.innerHTML += value;
+
+        return;
+    }
     });
 });
+
+const allButtons = [...numberButtons, ...operatorButtons];
+
+function handleKeyPress(key) {
+    if (key === "*") key = "x";
+    if (key === "Enter") key = "=";
+    if (key === "Backspace") key = "del";
+    if (key === "Escape") key = "C";
+
+    allButtons.forEach(btn => {
+        if (btn.textContent === key) {
+            btn.click();
+        }
+    });
+}
+
+document.addEventListener("keydown", (e) => handleKeyPress(e.key));
