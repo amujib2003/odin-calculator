@@ -20,13 +20,17 @@
 
 #display {
     display:flex;
+    justify-content: flex-end;
+    align-items: center;
     border: 3px solid black;
     height: 100px;
     width: 430px;
     margin-top: 30px;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    background-color: white;
+    padding-right: 10px;
+    font-size: 22px;
+    background-color: lightblue;
 }
 
 #buttons {
